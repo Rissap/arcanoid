@@ -1,4 +1,4 @@
-import random
+from random import shuffle
 
 class Ball:
     def __init__(self, canvas, paddle, score, color):
@@ -11,7 +11,7 @@ class Ball:
         self.canvas.move(self.id, 245, 100)
         
         start_from = [-2, -1, 1, 1]
-        random.shuffle(start_from)
+        shuffle(start_from)
         self.x = start_from[0]
         self.y = -2
 
