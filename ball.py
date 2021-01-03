@@ -1,7 +1,7 @@
 from random import shuffle
 
 class Ball:
-    def __init__(self, canvas, paddle, score, color):
+    def __init__(self, canvas, platform, score, color):
         self.canvas = canvas
         self.platform = platform
         self.score = score
@@ -29,21 +29,16 @@ class Ball:
         return False
 
     def draw(self):
-        self.canvas.move(self.id, self.x, self.y)
-        pos = self.canvas.coords(self.id)
-
-        if pos[0] <= 0:
-            self.y = 2
-
-        if pos[3] >= self.canvas_height:
-            self.hit_bottom = True
-            canvas.create_text(250, 120, text="You loose!", font("Courier", 30), fill="orange")
-
-        if self.hit_platform(pos):
-            self.y = -2
-
-        if pos[0] <= 0:
-            self.x = 2
-
-        if pos[2] >= self.canvas_width:
+        self.canvas.move(self.id, self.x, self.y) 
+        pos = self.canvas.coords(self.id) 
+        if pos[1] <= 0: 
+            self.y = 2 # если шарик правым нижним углом коснулся дна 
+        if pos[3] >= self.canvas_height: # помечаем это в отдельной переменной 
+            self.hit_bottom = True # выводим сообщение и количество 
+            self.canvas.create_text(250, 120, text='Вы проиграли', font=('Courier', 30), fill='red') 
+        if self.hit_platform(pos) == True:
+            self.y = -2 
+        if pos[0] <= 0: 
+            self.x = 2 
+        if pos[2] >= self.canvas_width: 
             self.x = -2
